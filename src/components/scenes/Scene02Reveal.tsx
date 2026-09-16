@@ -119,7 +119,7 @@ export default function Scene02Reveal({ onComplete }: Props) {
                 y: buttonPos.y,
                 rotate: buttonPos.r
               }}
-              transition={{ type: "spring", stiffness: 600, damping: 12, bounce: 0.5 }}
+              transition={{ type: "tween", duration: 0.2, ease: "easeOut" }}
               onPointerEnter={handleMaybeEscape}
               onPointerDown={handleMaybeEscape}
               onTouchStart={handleMaybeEscape}

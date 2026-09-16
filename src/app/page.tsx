@@ -18,7 +18,7 @@ import Scene08Finale from "@/components/scenes/Scene08Finale";
 
 export default function Home() {
   const [currentScene, setCurrentScene] = useState(0);
-  const [audioPlaying, setAudioPlaying] = useState(false);
+  const [audioTrack, setAudioTrack] = useState<string | null>(null);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -47,9 +47,15 @@ export default function Home() {
     <Scene03Elly key="scene03" onComplete={nextScene} />,
     <Scene04LoveLetter key="scene04" onComplete={nextScene} />,
     <Scene05Wishes key="scene05" onComplete={nextScene} />,
-    <Scene06HiddenHeart key="scene06" onComplete={nextScene} />,
-    <Scene07Countdown key="scene07" onComplete={nextScene} />,
-    <Scene08Finale key="scene08" onTriggerFinalAudio={() => setAudioPlaying(true)} />,
+    <Scene06HiddenHeart key="scene06" onComplete={() => {
+      setAudioTrack("https://files.catbox.moe/6nf6b3.mp3");
+      nextScene();
+    }} />,
+    <Scene07Countdown key="scene07" onComplete={() => {
+      setAudioTrack("https://files.catbox.moe/d4xhbq.mp3");
+      nextScene();
+    }} />,
+    <Scene08Finale key="scene08" />,
   ];
 
   return (
@@ -57,7 +63,7 @@ export default function Home() {
       <BackgroundEffect />
       <AmbientEffects />
       <CustomCursor />
-      <AudioController play={audioPlaying} />
+      <AudioController track={audioTrack} />
 
       <AnimatePresence mode="wait">
         {scenes[currentScene]}

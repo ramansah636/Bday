@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { birthdayConfig } from "@/config/birthday";
 
 interface AudioControllerProps {
-  play: boolean;
+  track: string | null;
 }
 
 let globalAudio: HTMLAudioElement | null = null;
@@ -23,19 +23,29 @@ export const initAudio = () => {
   }).catch(e => console.log("Audio unlock failed/pending", e));
 };
 
-export default function AudioController({ play }: AudioControllerProps) {
+export default function AudioController({ track }: AudioControllerProps) {
   const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
-    if (!birthdayConfig.music.enabled) return;
+    if (!birthdayConfig.music.enabled || !track) {
+      if (globalAudio) globalAudio.pause();
+      return;
+    }
 
     if (!globalAudio) {
-      globalAudio = new Audio(birthdayConfig.music.src);
+      globalAudio = new Audio(track);
       globalAudio.loop = true;
       globalAudio.volume = 0.5;
     }
 
-    if (play && !isMuted) {
+    // Check if the source needs to change
+    if (!globalAudio.src.includes(track)) {
+      globalAudio.pause();
+      globalAudio.src = track;
+      globalAudio.load();
+    }
+
+    if (!isMuted) {
       if (globalAudio.paused) {
         globalAudio.volume = 0;
         globalAudio.play().then(() => {
@@ -53,12 +63,12 @@ export default function AudioController({ play }: AudioControllerProps) {
           console.log("Audio auto-play prevented by browser.", err);
         });
       }
-    } else if (!play || isMuted) {
+    } else {
       if (globalAudio) globalAudio.pause();
     }
 
     // Do NOT pause on unmount because this is a global SPA player
-  }, [play, isMuted]);
+  }, [track, isMuted]);
 
   if (!birthdayConfig.music.enabled) return null;
 
