@@ -9,10 +9,15 @@ interface Props {
 }
 
 export default function Scene02Reveal({ onComplete }: Props) {
-  const [buttonPos, setButtonPos] = useState({ x: 0, y: 0 });
+  const [buttonPos, setButtonPos] = useState({ x: 0, y: 0, r: 0 });
+  const [sparkles, setSparkles] = useState<{ id: number; x: number; y: number }[]>([]);
+
   const handleMaybeEscape = (e?: React.SyntheticEvent) => {
     if (e) e.preventDefault();
     
+    // Spawn sparkle trail at old position
+    setSparkles(prev => [...prev.slice(-4), { id: Date.now(), x: buttonPos.x, y: buttonPos.y }]);
+
     // Calculate a safe jump distance bounded by viewport
     const viewportW = typeof window !== 'undefined' ? window.innerWidth : 600;
     const viewportH = typeof window !== 'undefined' ? window.innerHeight : 800;
@@ -23,6 +28,7 @@ export default function Scene02Reveal({ onComplete }: Props) {
     
     let newX = (Math.random() - 0.5) * maxRadiusX * 2;
     let newY = (Math.random() - 0.5) * maxRadiusY * 2;
+    const newR = (Math.random() - 0.5) * 30; // Random rotation between -15 and 15
     
     // Ensure it jumps a minimum distance away from current pos
     if (Math.abs(newX - buttonPos.x) < 80) newX = newX < 0 ? newX - 100 : newX + 100;
@@ -32,7 +38,7 @@ export default function Scene02Reveal({ onComplete }: Props) {
     newX = Math.max(-maxRadiusX, Math.min(maxRadiusX, newX));
     newY = Math.max(-maxRadiusY, Math.min(maxRadiusY, newY));
 
-    setButtonPos({ x: newX, y: newY });
+    setButtonPos({ x: newX, y: newY, r: newR });
   };
 
   return (
@@ -83,19 +89,33 @@ export default function Scene02Reveal({ onComplete }: Props) {
               Absolutely ❤️
             </motion.button>
 
+            {sparkles.map(s => (
+              <motion.div
+                key={s.id}
+                className="absolute text-[10px] pointer-events-none z-10 drop-shadow-sm"
+                initial={{ x: s.x, y: s.y, opacity: 1, scale: 1, rotate: 0 }}
+                animate={{ y: s.y - 20, opacity: 0, scale: 0, rotate: 180 }}
+                transition={{ duration: 0.8 }}
+                style={{ left: "50%", top: "50%" }}
+              >
+                ✨
+              </motion.div>
+            ))}
+
             <motion.button
               initial={{ scale: 0 }}
               animate={{ 
                 scale: 1,
                 x: buttonPos.x,
-                y: buttonPos.y
+                y: buttonPos.y,
+                rotate: buttonPos.r
               }}
-              transition={{ type: "spring", stiffness: 500, damping: 15 }}
+              transition={{ type: "spring", stiffness: 600, damping: 12, bounce: 0.5 }}
               onPointerEnter={handleMaybeEscape}
               onPointerDown={handleMaybeEscape}
               onTouchStart={handleMaybeEscape}
               onClick={handleMaybeEscape}
-              className="w-48 py-3 rounded-full glass-card text-brand-cream font-sans text-sm interactive z-30 absolute sm:static"
+              className="w-48 py-3 rounded-full glass-card text-brand-cream font-sans text-sm interactive z-30 absolute sm:static bg-white/5 border border-white/10"
               style={{ position: 'absolute' }}
             >
               Maybe... 👀

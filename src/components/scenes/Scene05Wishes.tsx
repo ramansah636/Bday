@@ -74,45 +74,75 @@ function WishCard({ wish, index }: { wish: string; index: number }) {
   const isAdventure = wish.toLowerCase().includes("adventure");
   const isSmile = wish.toLowerCase().includes("smile");
   const isNoodle = wish.toLowerCase().includes("noodle");
+  const isStress = wish.toLowerCase().includes("stress");
+  const isHappiness = wish.toLowerCase().includes("happiness");
   
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.5 + index * 0.2, duration: 0.8, type: "spring" }}
-      whileHover={{ y: -5, scale: 1.02 }}
-      className="glass-card p-6 md:p-8 rounded-2xl md:rounded-3xl flex items-center justify-center text-center min-h-[120px] md:min-h-[160px] relative overflow-hidden group interactive transform-gpu"
+      whileHover={{ y: -5, scale: 1.03, rotateX: 5, rotateY: -5 }}
+      style={{ perspective: 1000 }}
+      className="glass-card p-6 md:p-8 rounded-2xl md:rounded-3xl flex items-center justify-center text-center min-h-[120px] md:min-h-[160px] relative overflow-hidden group interactive transform-gpu shadow-[0_0_15px_rgba(200,101,145,0.05)] hover:shadow-[0_0_25px_rgba(200,101,145,0.2)] transition-shadow duration-500"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       
       {/* Unique micro animations based on content */}
       {isAdventure && (
         <motion.div 
-          className="absolute w-[2px] h-[20px] bg-white top-0 left-4 opacity-0 group-hover:opacity-100"
-          animate={{ y: [-20, 200], x: [0, 50], opacity: [0, 1, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+          className="absolute w-[2px] h-[30px] bg-white top-[-10px] left-[10px] opacity-0 group-hover:opacity-80"
+          animate={{ y: [-30, 250], x: [0, 80], opacity: [0, 1, 0] }}
+          transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
         />
       )}
       
       {isSmile && (
         <motion.div 
-          className="absolute w-full h-full bg-brand-pink/10 opacity-0 group-hover:opacity-100 top-0 left-0"
+          className="absolute w-[150%] h-[150%] bg-[radial-gradient(circle,rgba(243,166,199,0.15)_0%,transparent_60%)] opacity-0 group-hover:opacity-100 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
           animate={{ scale: [1, 1.2, 1] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         />
       )}
 
       {isNoodle && (
+        <>
+          <motion.div 
+            className="absolute right-4 bottom-4 text-2xl opacity-0 group-hover:opacity-30"
+            animate={{ y: [0, -10, 0], rotate: [0, 15, -15, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            🍜
+          </motion.div>
+          <motion.div 
+            className="absolute right-8 bottom-8 text-xl opacity-0 group-hover:opacity-20"
+            animate={{ y: [0, -15, 0], rotate: [0, -10, 10, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, delay: 0.5 }}
+          >
+            🍜
+          </motion.div>
+        </>
+      )}
+
+      {isStress && (
         <motion.div 
-          className="absolute right-4 bottom-4 text-2xl opacity-0 group-hover:opacity-20"
-          animate={{ y: [0, -10, 0], rotate: [0, 10, -10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-20 pointer-events-none"
+          animate={{ x: [0, 50, 100], opacity: [0, 0.2, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
         >
-          🍜
+          <span className="text-4xl blur-[2px]">☁️</span>
         </motion.div>
       )}
+
+      {isHappiness && (
+        <motion.div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-pink/20 rounded-full opacity-0 group-hover:opacity-100 blur-xl"
+          animate={{ scale: [0, 1.5], opacity: [0, 0.4, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+        />
+      )}
       
-      <p className="font-serif text-brand-cream text-sm md:text-lg lg:text-xl font-light relative z-10 leading-relaxed">
+      <p className="font-serif text-brand-cream text-sm md:text-lg lg:text-xl font-light relative z-10 leading-relaxed drop-shadow-sm group-hover:text-white transition-colors duration-300">
         {wish}
       </p>
     </motion.div>

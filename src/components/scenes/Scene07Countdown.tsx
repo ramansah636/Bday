@@ -31,11 +31,11 @@ export default function Scene11Countdown({ onComplete }: Props) {
       <div className="flex flex-col items-center justify-center h-full">
         <motion.div
           key={count}
-          initial={{ opacity: 0, scale: 0.5, filter: "blur(10px)" }}
+          initial={{ opacity: 0, scale: 0.2, filter: "blur(40px)" }}
           animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-          exit={{ opacity: 0, scale: 1.5, filter: "blur(10px)" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-9xl md:text-[15rem] font-display text-brand-pink text-glow"
+          exit={{ opacity: 0, scale: 2, filter: "blur(20px)" }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
+          className="text-9xl md:text-[20rem] font-display text-brand-pink text-glow drop-shadow-[0_0_100px_rgba(243,166,199,0.8)]"
         >
           {count > 0 ? count : ""}
         </motion.div>

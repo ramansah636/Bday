@@ -5,6 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import CustomCursor from "@/components/CustomCursor";
 import AudioController from "@/components/AudioController";
 import BackgroundEffect from "@/components/BackgroundEffect";
+import AmbientEffects from "@/components/ui/AmbientEffects";
 
 import Scene01Mystery from "@/components/scenes/Scene01Mystery";
 import Scene02Reveal from "@/components/scenes/Scene02Reveal";
@@ -54,6 +55,7 @@ export default function Home() {
   return (
     <main className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center">
       <BackgroundEffect />
+      <AmbientEffects />
       <CustomCursor />
       <AudioController play={audioPlaying} />
 
