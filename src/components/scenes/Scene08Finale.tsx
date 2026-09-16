@@ -92,9 +92,21 @@ export default function Scene08Finale() {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
-                className="transform scale-[0.65] md:scale-100 mt-20 md:mt-0"
+                className="transform scale-[0.65] md:scale-100 mt-20 md:mt-0 flex flex-col items-center"
               >
                 <BirthdayCake onWishMade={handleWishMade} />
+                <AnimatePresence>
+                  {stage === "cake" && (
+                    <motion.div 
+                      initial={{ opacity: 0 }} 
+                      animate={{ opacity: 1 }} 
+                      exit={{ opacity: 0 }}
+                      className="mt-8 font-sans text-brand-cream/80 text-sm md:text-base animate-pulse"
+                    >
+                      Touch the cake 🎂
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             )}
           </AnimatePresence>
@@ -138,7 +150,7 @@ export default function Scene08Finale() {
                   Made specially for you. ❤️
                 </p>
                 <p className="font-sans text-brand-cream/70 text-xs md:text-sm">
-                  Now go enjoy your birthday...
+                  Now go to sleep... 😴❤️
                 </p>
                 <motion.p 
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -146,7 +158,7 @@ export default function Scene08Finale() {
                   transition={{ delay: 3, type: "spring" }}
                   className="font-serif text-brand-rose italic text-sm md:text-base"
                 >
-                  ...and please don&apos;t forget the noodles. 🍜
+                  ...and please don&apos;t forget the chicken 🍗
                 </motion.p>
               </motion.div>
             )}

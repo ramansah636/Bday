@@ -52,10 +52,7 @@ export default function Home() {
     <Scene04LoveLetter key="scene04" onComplete={nextScene} />,
     <Scene05Wishes key="scene05" onComplete={nextScene} />,
     <Scene06HiddenHeart key="scene06" onComplete={nextScene} />,
-    <Scene07Countdown key="scene07" onComplete={() => {
-      setAudioTrack("https://files.catbox.moe/6nf6b3.mp3");
-      nextScene();
-    }} />,
+    <Scene07Countdown key="scene07" onComplete={nextScene} />,
     <Scene08Finale key="scene08" />,
   ];
 
