@@ -36,28 +36,24 @@ export default function Scene01Mystery({ onComplete }: Props) {
         </motion.p>
       </div>
 
-      <motion.button
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ 
-          opacity: 1, 
-          scale: [1, 1.02, 1],
-          boxShadow: ["0 0 10px rgba(243, 166, 199, 0.2)", "0 0 25px rgba(243, 166, 199, 0.6)", "0 0 10px rgba(243, 166, 199, 0.2)"]
-        }}
-        transition={{ 
-          delay: 7, 
-          duration: 1.5,
-          scale: { delay: 8.5, duration: 2, repeat: Infinity, ease: "easeInOut" },
-          boxShadow: { delay: 8.5, duration: 2, repeat: Infinity, ease: "easeInOut" }
-        }}
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={onComplete}
-        className="mt-16 group relative px-10 py-4 md:px-12 md:py-5 rounded-full bg-brand-pink text-white font-sans tracking-widest text-sm uppercase flex items-center gap-3 overflow-hidden interactive"
+
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.5, duration: 0.5 }}
+        className="mt-8"
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-pink/30 via-brand-rose/30 to-brand-pink/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <Sparkles size={16} className="text-brand-rose group-hover:animate-pulse" />
-        <span className="relative z-10 text-shadow-sm font-semibold">Open Your Surprise</span>
-      </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={onComplete}
+          className="group relative px-10 py-4 md:px-12 md:py-5 rounded-full bg-brand-pink text-white font-sans tracking-widest text-sm uppercase flex items-center justify-center gap-3 overflow-hidden interactive mx-auto shadow-[0_0_20px_rgba(200,101,145,0.4)]"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-pink/30 via-brand-rose/30 to-brand-pink/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <Sparkles size={16} className="text-brand-rose group-hover:animate-pulse" />
+          <span className="relative z-10 text-shadow-sm font-semibold">Open Your Surprise</span>
+        </motion.button>
+      </motion.div>
     </motion.div>
   );
 }

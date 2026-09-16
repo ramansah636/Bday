@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 import { motion } from "framer-motion";
 import { birthdayConfig } from "@/config/birthday";
@@ -9,30 +9,42 @@ interface AudioControllerProps {
   play: boolean;
 }
 
+let globalAudio: HTMLAudioElement | null = null;
+
+export const initAudio = () => {
+  if (typeof window === "undefined") return;
+  if (!globalAudio) {
+    globalAudio = new Audio(birthdayConfig.music.src);
+    globalAudio.loop = true;
+    globalAudio.volume = 0.5;
+  }
+  globalAudio.play().then(() => {
+    globalAudio?.pause();
+  }).catch(e => console.log("Audio unlock failed/pending", e));
+};
+
 export default function AudioController({ play }: AudioControllerProps) {
   const [isMuted, setIsMuted] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     if (!birthdayConfig.music.enabled) return;
 
-    if (!audioRef.current) {
-      const audio = new Audio(birthdayConfig.music.src);
-      audio.loop = true;
-      audio.volume = 0.5;
-      audioRef.current = audio;
+    if (!globalAudio) {
+      globalAudio = new Audio(birthdayConfig.music.src);
+      globalAudio.loop = true;
+      globalAudio.volume = 0.5;
     }
 
     if (play && !isMuted) {
-      if (audioRef.current.paused) {
-        audioRef.current.volume = 0;
-        audioRef.current.play().then(() => {
+      if (globalAudio.paused) {
+        globalAudio.volume = 0;
+        globalAudio.play().then(() => {
           let vol = 0;
           const targetVol = 0.5; // MEDIUM level
           const fadeInterval = setInterval(() => {
             if (vol < targetVol) {
               vol += 0.05;
-              if (audioRef.current) audioRef.current.volume = Math.min(vol, targetVol);
+              if (globalAudio) globalAudio.volume = Math.min(vol, targetVol);
             } else {
               clearInterval(fadeInterval);
             }
@@ -42,14 +54,10 @@ export default function AudioController({ play }: AudioControllerProps) {
         });
       }
     } else if (!play || isMuted) {
-      audioRef.current.pause();
+      if (globalAudio) globalAudio.pause();
     }
 
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-      }
-    };
+    // Do NOT pause on unmount because this is a global SPA player
   }, [play, isMuted]);
 
   if (!birthdayConfig.music.enabled) return null;

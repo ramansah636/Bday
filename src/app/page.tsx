@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import CustomCursor from "@/components/CustomCursor";
-import AudioController from "@/components/AudioController";
+import AudioController, { initAudio } from "@/components/AudioController";
 import BackgroundEffect from "@/components/BackgroundEffect";
 import AmbientEffects from "@/components/ui/AmbientEffects";
 
@@ -42,14 +42,14 @@ export default function Home() {
   }
 
   const scenes = [
-    <Scene01Mystery key="scene01" onComplete={() => { setAudioPlaying(true); nextScene(); }} />,
+    <Scene01Mystery key="scene01" onComplete={() => { initAudio(); nextScene(); }} />,
     <Scene02Reveal key="scene02" onComplete={nextScene} />,
     <Scene03Elly key="scene03" onComplete={nextScene} />,
     <Scene04LoveLetter key="scene04" onComplete={nextScene} />,
     <Scene05Wishes key="scene05" onComplete={nextScene} />,
     <Scene06HiddenHeart key="scene06" onComplete={nextScene} />,
     <Scene07Countdown key="scene07" onComplete={nextScene} />,
-    <Scene08Finale key="scene08" />,
+    <Scene08Finale key="scene08" onTriggerFinalAudio={() => setAudioPlaying(true)} />,
   ];
 
   return (

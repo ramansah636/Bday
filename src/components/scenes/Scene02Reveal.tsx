@@ -9,7 +9,8 @@ interface Props {
 }
 
 export default function Scene02Reveal({ onComplete }: Props) {
-  const [buttonPos, setButtonPos] = useState({ x: 0, y: 0, r: 0 });
+  // Start the evasive button below the main button initially to prevent overlap
+  const [buttonPos, setButtonPos] = useState({ x: 0, y: 80, r: 0 });
   const [sparkles, setSparkles] = useState<{ id: number; x: number; y: number }[]>([]);
 
   const handleMaybeEscape = (e?: React.SyntheticEvent) => {
@@ -123,7 +124,7 @@ export default function Scene02Reveal({ onComplete }: Props) {
               onPointerDown={handleMaybeEscape}
               onTouchStart={handleMaybeEscape}
               onClick={handleMaybeEscape}
-              className="w-48 py-3 rounded-full glass-card text-brand-cream font-sans text-sm interactive z-30 absolute sm:static bg-white/5 border border-white/10"
+              className="w-48 py-3 rounded-full glass-card text-brand-cream font-sans text-sm interactive z-30 absolute bg-white/5 border border-white/10"
               style={{ position: 'absolute' }}
             >
               Maybe... 👀

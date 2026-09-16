@@ -116,16 +116,19 @@ export default function Scene03Elly({ onComplete }: Props) {
           ))}
         </motion.div>
 
-        <div className="text-h3 font-display text-brand-cream font-light italic px-4 drop-shadow-md">
-          <TextReveal text="...who somehow makes ordinary days" type="blur" delay={1.5} />
-          <br />
-          <TextReveal text="feel less ordinary." type="blur" delay={2.0} />
+        <div className="flex flex-col items-center justify-center space-y-6 md:space-y-8 pt-8">
+          <div className="text-h3 font-display text-brand-cream font-light italic px-4 drop-shadow-md leading-relaxed w-full">
+            <TextReveal text="...who somehow makes ordinary days" type="blur" delay={2.5} />
+          </div>
+          <div className="text-h3 font-display text-brand-cream font-light italic px-4 drop-shadow-md leading-relaxed w-full">
+            <TextReveal text="feel less ordinary." type="blur" delay={3.5} />
+          </div>
         </div>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.5 }}
-          transition={{ delay: 2.5, duration: 1 }}
+          transition={{ delay: 5.0, duration: 1 }}
           className="absolute bottom-12 left-1/2 -translate-x-1/2 text-xs font-sans tracking-widest animate-bounce w-full"
         >
           TAP ANYWHERE TO CONTINUE
