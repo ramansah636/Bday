@@ -7,9 +7,10 @@ import { birthdayConfig } from "@/config/birthday";
 
 interface AudioControllerProps {
   play: boolean;
+  finalAudioTrigger?: boolean;
 }
 
-export default function AudioController({ play }: AudioControllerProps) {
+export default function AudioController({ play, finalAudioTrigger }: AudioControllerProps) {
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -24,20 +25,28 @@ export default function AudioController({ play }: AudioControllerProps) {
     }
 
     if (play && !isMuted) {
-      audioRef.current.volume = 0;
-      audioRef.current.play().then(() => {
-        let vol = 0;
-        const fadeInterval = setInterval(() => {
-          if (vol < 0.5) {
-            vol += 0.05;
-            if (audioRef.current) audioRef.current.volume = Math.min(vol, 0.5);
-          } else {
-            clearInterval(fadeInterval);
-          }
-        }, 300);
-      }).catch((err) => {
-        console.log("Audio auto-play prevented by browser.", err);
-      });
+      if (finalAudioTrigger && audioRef.current.src !== birthdayConfig.music.finaleSrc) {
+        audioRef.current.pause();
+        audioRef.current.src = birthdayConfig.music.finaleSrc;
+      }
+      
+      if (audioRef.current.paused) {
+        audioRef.current.volume = 0;
+        audioRef.current.play().then(() => {
+          let vol = 0;
+          const targetVol = finalAudioTrigger ? 0.5 : 0.5; // MEDIUM level
+          const fadeInterval = setInterval(() => {
+            if (vol < targetVol) {
+              vol += 0.05;
+              if (audioRef.current) audioRef.current.volume = Math.min(vol, targetVol);
+            } else {
+              clearInterval(fadeInterval);
+            }
+          }, 200);
+        }).catch((err) => {
+          console.log("Audio auto-play prevented by browser.", err);
+        });
+      }
     } else if (!play || isMuted) {
       audioRef.current.pause();
     }
@@ -47,7 +56,7 @@ export default function AudioController({ play }: AudioControllerProps) {
         audioRef.current.pause();
       }
     };
-  }, [play, isMuted]);
+  }, [play, isMuted, finalAudioTrigger]);
 
   if (!birthdayConfig.music.enabled) return null;
 

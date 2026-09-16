@@ -19,6 +19,7 @@ import Scene08Finale from "@/components/scenes/Scene08Finale";
 export default function Home() {
   const [currentScene, setCurrentScene] = useState(0);
   const [audioPlaying, setAudioPlaying] = useState(false);
+  const [finalAudioTrigger, setFinalAudioTrigger] = useState(false);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -49,7 +50,7 @@ export default function Home() {
     <Scene05Wishes key="scene05" onComplete={nextScene} />,
     <Scene06HiddenHeart key="scene06" onComplete={nextScene} onUnlockAudio={() => setAudioPlaying(true)} />,
     <Scene07Countdown key="scene07" onComplete={nextScene} />,
-    <Scene08Finale key="scene08" />,
+    <Scene08Finale key="scene08" onTriggerFinalAudio={() => setFinalAudioTrigger(true)} />,
   ];
 
   return (
@@ -57,7 +58,7 @@ export default function Home() {
       <BackgroundEffect />
       <AmbientEffects />
       <CustomCursor />
-      <AudioController play={audioPlaying} />
+      <AudioController play={audioPlaying} finalAudioTrigger={finalAudioTrigger} />
 
       <AnimatePresence mode="wait">
         {scenes[currentScene]}

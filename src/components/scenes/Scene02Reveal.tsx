@@ -34,6 +34,13 @@ export default function Scene02Reveal({ onComplete }: Props) {
     if (Math.abs(newX - buttonPos.x) < 80) newX = newX < 0 ? newX - 100 : newX + 100;
     if (Math.abs(newY - buttonPos.y) < 80) newY = newY < 0 ? newY - 100 : newY + 100;
     
+    // Prevent overlapping with the main button (which is roughly around 0,0)
+    if (Math.abs(newX) < 110 && Math.abs(newY) < 70) {
+      if (Math.abs(newY) < 70) {
+        newY = newY >= 0 ? newY + 70 : newY - 70;
+      }
+    }
+
     // Final clamp to ensure safety
     newX = Math.max(-maxRadiusX, Math.min(maxRadiusX, newX));
     newY = Math.max(-maxRadiusY, Math.min(maxRadiusY, newY));
@@ -47,7 +54,7 @@ export default function Scene02Reveal({ onComplete }: Props) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, y: -50 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 0.5 }}
     >
       <div className="space-y-6 md:space-y-8 max-w-3xl w-full">
         <h1 className="font-display text-h1 text-brand-cream leading-tight">
@@ -59,7 +66,7 @@ export default function Scene02Reveal({ onComplete }: Props) {
         <motion.p
           initial={{ opacity: 0, filter: "blur(5px)" }}
           animate={{ opacity: 1, filter: "blur(0px)" }}
-          transition={{ delay: 2.5, duration: 1.5 }}
+          transition={{ delay: 1.5, duration: 1 }}
           className="text-lg md:text-2xl font-sans text-brand-rose font-light"
         >
           Today is all about you.
@@ -68,7 +75,7 @@ export default function Scene02Reveal({ onComplete }: Props) {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 4.5, duration: 1 }}
+          transition={{ delay: 2.5, duration: 0.5 }}
           className="pt-8 md:pt-12 space-y-6"
         >
           <p className="text-sm md:text-base font-sans text-brand-cream/80">

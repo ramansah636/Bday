@@ -10,13 +10,13 @@ interface Props {
   staggerDelay?: number;
 }
 
-export default function TextReveal({ text, type = "blur", delay = 0, className = "", staggerDelay = 0.1 }: Props) {
+export default function TextReveal({ text, type = "blur", delay = 0, className = "", staggerDelay = 0.05 }: Props) {
   if (type === "blur") {
     return (
       <motion.span
         initial={{ opacity: 0, filter: "blur(10px)", y: 10 }}
         animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-        transition={{ duration: 1.5, delay, ease: "easeOut" }}
+        transition={{ duration: 1.0, delay, ease: "easeOut" }}
         className={`inline-block ${className}`}
       >
         {text}
@@ -33,7 +33,7 @@ export default function TextReveal({ text, type = "blur", delay = 0, className =
             key={i}
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: delay + i * staggerDelay, ease: "easeOut" }}
+            transition={{ duration: 0.5, delay: delay + i * staggerDelay, ease: "easeOut" }}
             className="inline-block mr-[0.25em]"
           >
             {word}
@@ -51,7 +51,7 @@ export default function TextReveal({ text, type = "blur", delay = 0, className =
             key={i}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: delay + i * (staggerDelay / 2), ease: "easeOut" }}
+            transition={{ duration: 0.3, delay: delay + i * (staggerDelay / 2), ease: "easeOut" }}
             className="inline-block"
           >
             {char === " " ? "\u00A0" : char}

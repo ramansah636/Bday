@@ -10,6 +10,7 @@ export const birthdayConfig = {
 
   music: {
     src: "https://files.catbox.moe/6nf6b3.mp3",
+    finaleSrc: "https://files.catbox.moe/d4xhbq.mp3",
     // Set to true if you have an audio file in public/audio/birthday.mp3
     enabled: true,
   },

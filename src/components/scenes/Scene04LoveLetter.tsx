@@ -27,7 +27,7 @@ export default function Scene06LoveLetter({ onComplete }: Props) {
       <motion.div 
         className="absolute inset-0 z-[-1]"
         animate={{ y: [0, -10, 0], x: [0, 5, 0] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       >
         <div className="absolute top-[20%] left-[20%] w-[40%] h-[40%] bg-brand-pink/5 blur-[100px] rounded-full" />
         <div className="absolute bottom-[20%] right-[20%] w-[30%] h-[30%] bg-brand-rose/5 blur-[80px] rounded-full" />
@@ -38,31 +38,31 @@ export default function Scene06LoveLetter({ onComplete }: Props) {
         
         <div className="space-y-10 md:space-y-12 font-serif text-base md:text-xl lg:text-2xl text-brand-cream/90 leading-relaxed font-light tracking-wide">
           <p>
-            <TextReveal text="Sayang Ellya," type="blur" delay={1} />
+            <TextReveal text="I want you to know..." type="blur" delay={0.2} />
+          </p>
+          <h2 className="font-display text-2xl md:text-5xl text-brand-cream leading-relaxed mt-4 drop-shadow-md">
+            <TextReveal text="How incredibly special you are to me." type="word" delay={1.5} />
+          </h2>
+          <p>
+            <TextReveal text="I wanted to build something that felt as special as you make me feel. I'm not always perfect with words, so I wrote this with code instead." type="blur" delay={3} />
           </p>
           <p>
-            <TextReveal text="There's something I wanted to tell you..." type="word" delay={2.5} />
-          </p>
-          <p>
-            <TextReveal text="I wanted to build something that felt as special as you make me feel. I'm not always perfect with words, so I wrote this with code instead." type="blur" delay={4.5} />
-          </p>
-          <p>
-            <TextReveal text="Thank you for being exactly who you are. For the laughs, the late-night talks, the random arguments over food, and just... everything." type="blur" delay={7} />
+            <TextReveal text="Thank you for being exactly who you are. For the laughs, the late-night talks, the random arguments over food, and just... everything." type="blur" delay={5} />
           </p>
           <motion.p
             initial={{ textShadow: "0px 0px 0px rgba(255,255,255,0)" }}
             animate={{ textShadow: "0px 0px 15px rgba(255,255,255,0.3)" }}
-            transition={{ delay: 9.5, duration: 3 }}
+            transition={{ delay: 7, duration: 3 }}
           >
-            <TextReveal text="I hope this next year brings you so much joy." type="blur" delay={9.5} />
+            <TextReveal text="I hope this next year brings you so much joy." type="blur" delay={7} />
           </motion.p>
         </div>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 12, duration: 2 }}
-          className="mt-14 md:mt-20 text-center"
+          transition={{ delay: 8.5, duration: 0.8 }}
+          className="pt-12 md:mt-20 text-center"
         >
           <button
             onClick={onComplete}

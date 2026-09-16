@@ -7,7 +7,11 @@ import confetti from "canvas-confetti";
 import TextReveal from "@/components/ui/TextReveal";
 import BirthdayCake from "@/components/ui/BirthdayCake";
 
-export default function Scene08Finale() {
+interface Props {
+  onTriggerFinalAudio?: () => void;
+}
+
+export default function Scene08Finale({ onTriggerFinalAudio }: Props) {
   const [stage, setStage] = useState<"intro" | "cake" | "celebration" | "final">("intro");
   const containerRef = useRef<HTMLDivElement>(null);
   const [stars, setStars] = useState<{ id: number; size: number; left: number; top: number; dur: number; delay: number }[]>([]);
@@ -27,12 +31,13 @@ export default function Scene08Finale() {
     // Intro sequence builds up the atmosphere
     const timer = setTimeout(() => {
       setStage("cake");
-    }, 4000);
+    }, 2000);
     return () => clearTimeout(timer);
   }, []);
 
   const handleWishMade = () => {
     setStage("celebration");
+    if (onTriggerFinalAudio) onTriggerFinalAudio();
     
     // Celebration particles
     confetti({
@@ -46,7 +51,7 @@ export default function Scene08Finale() {
     // Start final message sequence
     setTimeout(() => {
       setStage("final");
-    }, 4000);
+    }, 2500);
   };
 
   return (

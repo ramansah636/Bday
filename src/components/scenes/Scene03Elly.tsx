@@ -33,31 +33,31 @@ export default function Scene03Elly({ onComplete }: Props) {
       initial={{ opacity: 0, filter: "blur(20px)" }}
       animate={{ opacity: 1, filter: "blur(0px)" }}
       exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
-      transition={{ duration: 2, ease: "easeOut" }}
+      transition={{ duration: 1, ease: "easeOut" }}
     >
       {/* Background Cinematic Movement */}
       <motion.div 
         className="absolute inset-0 z-[-1] opacity-50 bg-[radial-gradient(circle_at_center,rgba(243,166,199,0.1)_0%,transparent_60%)]"
         animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
       
       <div className="space-y-12 md:space-y-16 w-full max-w-4xl relative z-10">
         <div className="text-sm md:text-xl font-sans text-brand-cream/80 tracking-widest uppercase">
-          <TextReveal text="For the girl named" type="word" delay={0.5} />
+          <TextReveal text="For the girl named" type="word" delay={0.2} />
         </div>
 
         <motion.div
           initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
           animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-          transition={{ delay: 1.5, duration: 2, type: "spring", bounce: 0.2 }}
+          transition={{ delay: 0.6, duration: 1, type: "spring", bounce: 0.2 }}
           className="relative inline-block w-full"
         >
           {/* Subtle Light Rays behind name */}
           <motion.div 
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[150%] bg-white/5 blur-2xl rounded-full"
             animate={{ opacity: [0, 0.5, 0], scale: [0.8, 1.1, 0.8] }}
-            transition={{ delay: 2, duration: 4, repeat: Infinity }}
+            transition={{ delay: 0.8, duration: 2, repeat: Infinity }}
           />
 
           <h2 className="font-display text-h1 text-white z-10 relative px-4 drop-shadow-[0_0_25px_rgba(255,255,255,0.4)]">
@@ -73,7 +73,7 @@ export default function Scene03Elly({ onComplete }: Props) {
               strokeLinecap="round"
               initial={{ pathLength: 0, opacity: 0 }}
               animate={{ pathLength: 1, opacity: 1 }}
-              transition={{ delay: 2.5, duration: 1.5, ease: "easeInOut" }}
+              transition={{ delay: 1, duration: 1, ease: "easeInOut" }}
             />
             <defs>
               <linearGradient id="gradient-line" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -115,15 +115,15 @@ export default function Scene03Elly({ onComplete }: Props) {
         </motion.div>
 
         <div className="text-xl md:text-3xl font-display text-brand-cream font-light italic px-4 drop-shadow-md">
-          <TextReveal text="...who somehow makes ordinary days" type="blur" delay={4} />
+          <TextReveal text="...who somehow makes ordinary days" type="blur" delay={1.5} />
           <br />
-          <TextReveal text="feel less ordinary." type="blur" delay={5} />
+          <TextReveal text="feel less ordinary." type="blur" delay={2.0} />
         </div>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.5 }}
-          transition={{ delay: 7, duration: 1 }}
+          transition={{ delay: 2.5, duration: 1 }}
           className="absolute bottom-12 left-1/2 -translate-x-1/2 text-xs font-sans tracking-widest animate-bounce w-full"
         >
           TAP ANYWHERE TO CONTINUE

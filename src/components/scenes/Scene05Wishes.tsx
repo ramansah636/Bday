@@ -43,7 +43,7 @@ export default function Scene07Wishes({ onComplete }: Props) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 1.5 }}
+      transition={{ duration: 0.5 }}
     >
       <div className="text-center mb-12 md:mb-16 mt-auto">
         <h2 className="font-display text-3xl md:text-5xl text-brand-cream">
@@ -60,7 +60,7 @@ export default function Scene07Wishes({ onComplete }: Props) {
       <motion.button
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2.5 }}
+        transition={{ delay: 1.5, duration: 0.5 }}
         onClick={onComplete}
         className="mt-12 px-8 py-4 rounded-full bg-brand-pink text-white font-sans tracking-widest text-sm interactive shadow-[0_0_20px_rgba(200,101,145,0.4)] z-10"
       >

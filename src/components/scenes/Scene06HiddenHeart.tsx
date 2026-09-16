@@ -57,7 +57,7 @@ export default function Scene08HiddenHeart({ onComplete, onUnlockAudio }: Props)
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, scale: 1.1 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 0.5 }}
     >
       <div className="absolute top-10 md:top-20 text-center z-20 pointer-events-none w-full px-4">
         <h2 className="font-display text-2xl md:text-4xl text-brand-cream text-glow">
