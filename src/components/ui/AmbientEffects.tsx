@@ -9,7 +9,7 @@ export default function AmbientEffects() {
   useEffect(() => {
     // Generate gentle background floating dust
     const isMobile = window.innerWidth < 768;
-    const count = isMobile ? 15 : 30;
+    const count = isMobile ? 5 : 30;
     
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setParticles(
@@ -26,25 +26,15 @@ export default function AmbientEffects() {
 
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 mix-blend-screen">
-      {/* Soft Nebula Orbs */}
-      <motion.div
-        className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-brand-pink/5 blur-[120px]"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3],
-          x: [0, 50, 0],
-          y: [0, 30, 0],
-        }}
+      {/* Deep nebula glow - Desktop Only */}
+      <motion.div 
+        className="absolute top-[-20%] right-[-10%] w-[60%] h-[60%] bg-brand-rose/5 rounded-full blur-[120px] hidden md:block"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
         transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
       />
-      <motion.div
-        className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-brand-rose/5 blur-[150px]"
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.2, 0.4, 0.2],
-          x: [0, -40, 0],
-          y: [0, -50, 0],
-        }}
+      <motion.div 
+        className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-brand-pink/5 rounded-full blur-[100px] hidden md:block"
+        animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.5, 0.2] }}
         transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }}
       />
 

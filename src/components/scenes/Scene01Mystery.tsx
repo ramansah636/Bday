@@ -11,16 +11,16 @@ interface Props {
 export default function Scene01Mystery({ onComplete }: Props) {
   return (
     <motion.div
-      className="absolute inset-0 flex flex-col items-center justify-center z-10 p-6"
-      initial={{ opacity: 0, filter: "blur(20px)" }}
+      className="absolute inset-0 flex flex-col items-center justify-center z-10 p-6 overflow-hidden w-full"
+      initial={{ opacity: 0, filter: "blur(10px)" }}
       animate={{ opacity: 1, filter: "blur(0px)" }}
-      exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+      exit={{ opacity: 0, scale: 0.9, filter: "blur(5px)" }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-brand-midnight via-brand-midnight/90 to-brand-midnight/80 z-[-1]" />
       
-      <div className="text-center space-y-6 max-w-md mx-auto">
-        <h1 className="font-display text-3xl md:text-5xl text-brand-cream font-light tracking-wide leading-relaxed">
+      <div className="text-center z-10 space-y-6 w-full max-w-[90vw]">
+        <h1 className="text-h3 md:text-h2 text-brand-cream font-light tracking-wide leading-relaxed break-words">
           <TextReveal text="Hey, Sayang Ellya..." type="blur" delay={0.3} />
           <br />
           <TextReveal text="I made something for you." type="blur" delay={1.2} className="text-brand-rose drop-shadow-[0_0_10px_rgba(243,166,199,0.3)]" />
@@ -52,7 +52,7 @@ export default function Scene01Mystery({ onComplete }: Props) {
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
         onClick={onComplete}
-        className="mt-16 group relative px-8 py-4 rounded-full bg-brand-pink/10 border border-brand-pink text-brand-cream font-sans tracking-widest text-sm uppercase flex items-center gap-3 overflow-hidden interactive"
+        className="mt-16 group relative px-10 py-4 md:px-12 md:py-5 rounded-full bg-brand-pink text-white font-sans tracking-widest text-sm uppercase flex items-center gap-3 overflow-hidden interactive"
       >
         <div className="absolute inset-0 bg-gradient-to-r from-brand-pink/30 via-brand-rose/30 to-brand-pink/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         <Sparkles size={16} className="text-brand-rose group-hover:animate-pulse" />

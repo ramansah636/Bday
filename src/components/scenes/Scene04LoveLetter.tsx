@@ -25,7 +25,7 @@ export default function Scene06LoveLetter({ onComplete }: Props) {
 
       {/* Gentle camera pan effect on container */}
       <motion.div 
-        className="absolute inset-0 z-[-1]"
+        className="absolute inset-0 z-[-1] hidden md:block"
         animate={{ y: [0, -10, 0], x: [0, 5, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       >
@@ -40,7 +40,7 @@ export default function Scene06LoveLetter({ onComplete }: Props) {
           <p>
             <TextReveal text="I want you to know..." type="blur" delay={0.2} />
           </p>
-          <h2 className="font-display text-2xl md:text-5xl text-brand-cream leading-relaxed mt-4 drop-shadow-md">
+          <h2 className="text-h3 md:text-h2 font-display text-brand-cream leading-tight mt-4 drop-shadow-md">
             <TextReveal text="How incredibly special you are to me." type="word" delay={1.5} />
           </h2>
           <p>

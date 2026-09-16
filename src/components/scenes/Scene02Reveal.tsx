@@ -35,9 +35,10 @@ export default function Scene02Reveal({ onComplete }: Props) {
     if (Math.abs(newY - buttonPos.y) < 80) newY = newY < 0 ? newY - 100 : newY + 100;
     
     // Prevent overlapping with the main button (which is roughly around 0,0)
-    if (Math.abs(newX) < 110 && Math.abs(newY) < 70) {
-      if (Math.abs(newY) < 70) {
-        newY = newY >= 0 ? newY + 70 : newY - 70;
+    // Mobile safety box
+    if (Math.abs(newX) < 130 && Math.abs(newY) < 90) {
+      if (Math.abs(newY) < 90) {
+        newY = newY >= 0 ? newY + 90 : newY - 90;
       }
     }
 
@@ -56,8 +57,8 @@ export default function Scene02Reveal({ onComplete }: Props) {
       exit={{ opacity: 0, y: -50 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="space-y-6 md:space-y-8 max-w-3xl w-full">
-        <h1 className="font-display text-h1 text-brand-cream leading-tight">
+      <div className="space-y-6 md:space-y-8 w-full max-w-[90vw] md:max-w-3xl">
+        <h1 className="text-h2 md:text-h1 text-brand-cream leading-tight break-words">
           <TextReveal text="Happy Birthday," type="word" delay={0.5} />
           <br className="sm:hidden" />
           <TextReveal text="Sayang Ellya ❤️" type="word" delay={1} className="text-brand-pink" />

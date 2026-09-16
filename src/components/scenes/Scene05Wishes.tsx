@@ -45,8 +45,8 @@ export default function Scene07Wishes({ onComplete }: Props) {
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="text-center mb-12 md:mb-16 mt-auto">
-        <h2 className="font-display text-3xl md:text-5xl text-brand-cream">
+      <div className="text-center mb-12 md:mb-16 mt-auto px-4">
+        <h2 className="text-h3 md:text-h2 font-display text-brand-cream break-words">
           My wishes for you...
         </h2>
       </div>

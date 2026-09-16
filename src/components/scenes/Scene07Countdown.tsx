@@ -35,7 +35,7 @@ export default function Scene11Countdown({ onComplete }: Props) {
           animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
           exit={{ opacity: 0, scale: 2, filter: "blur(20px)" }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="text-9xl md:text-[20rem] font-display text-brand-pink text-glow drop-shadow-[0_0_100px_rgba(243,166,199,0.8)]"
+          className="text-[clamp(8rem,40vw,20rem)] font-display text-brand-pink text-glow drop-shadow-[0_0_100px_rgba(243,166,199,0.8)] leading-none"
         >
           {count > 0 ? count : ""}
         </motion.div>

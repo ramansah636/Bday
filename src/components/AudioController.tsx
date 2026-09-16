@@ -7,10 +7,9 @@ import { birthdayConfig } from "@/config/birthday";
 
 interface AudioControllerProps {
   play: boolean;
-  finalAudioTrigger?: boolean;
 }
 
-export default function AudioController({ play, finalAudioTrigger }: AudioControllerProps) {
+export default function AudioController({ play }: AudioControllerProps) {
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -25,16 +24,11 @@ export default function AudioController({ play, finalAudioTrigger }: AudioContro
     }
 
     if (play && !isMuted) {
-      if (finalAudioTrigger && audioRef.current.src !== birthdayConfig.music.finaleSrc) {
-        audioRef.current.pause();
-        audioRef.current.src = birthdayConfig.music.finaleSrc;
-      }
-      
       if (audioRef.current.paused) {
         audioRef.current.volume = 0;
         audioRef.current.play().then(() => {
           let vol = 0;
-          const targetVol = finalAudioTrigger ? 0.5 : 0.5; // MEDIUM level
+          const targetVol = 0.5; // MEDIUM level
           const fadeInterval = setInterval(() => {
             if (vol < targetVol) {
               vol += 0.05;
@@ -56,7 +50,7 @@ export default function AudioController({ play, finalAudioTrigger }: AudioContro
         audioRef.current.pause();
       }
     };
-  }, [play, isMuted, finalAudioTrigger]);
+  }, [play, isMuted]);
 
   if (!birthdayConfig.music.enabled) return null;
 

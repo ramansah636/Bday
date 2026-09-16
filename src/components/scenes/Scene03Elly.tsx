@@ -13,17 +13,19 @@ export default function Scene03Elly({ onComplete }: Props) {
   const [hearts, setHearts] = useState<{ id: number; top: number; left: number; y: number; x: number; delay: number; duration: number }[]>([]);
 
   useEffect(() => {
-    const generated = Array.from({ length: 6 }).map((_, i) => ({
-      id: i,
-      left: 20 + Math.random() * 60,
-      top: 20 + Math.random() * 60,
-      y: -60 - Math.random() * 60,
-      x: (Math.random() - 0.5) * 150,
-      delay: 2 + Math.random() * 2,
-      duration: 3 + Math.random() * 2,
-    }));
+    const isMobile = window.innerWidth < 768;
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setHearts(generated);
+    setHearts(
+      Array.from({ length: isMobile ? 8 : 20 }).map((_, i) => ({
+        id: i,
+        left: 20 + Math.random() * 60,
+        top: 20 + Math.random() * 60,
+        y: -60 - Math.random() * 60,
+        x: (Math.random() - 0.5) * 150,
+        delay: 2 + Math.random() * 2,
+        duration: 3 + Math.random() * 2,
+      }))
+    );
   }, []);
 
   return (
@@ -42,8 +44,8 @@ export default function Scene03Elly({ onComplete }: Props) {
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
       
-      <div className="space-y-12 md:space-y-16 w-full max-w-4xl relative z-10">
-        <div className="text-sm md:text-xl font-sans text-brand-cream/80 tracking-widest uppercase">
+      <div className="space-y-12 md:space-y-16 w-full max-w-[90vw] md:max-w-4xl relative z-10">
+        <div className="text-brand-pink font-sans tracking-[0.3em] text-sm uppercase">
           <TextReveal text="For the girl named" type="word" delay={0.2} />
         </div>
 
@@ -60,7 +62,7 @@ export default function Scene03Elly({ onComplete }: Props) {
             transition={{ delay: 0.8, duration: 2, repeat: Infinity }}
           />
 
-          <h2 className="font-display text-h1 text-white z-10 relative px-4 drop-shadow-[0_0_25px_rgba(255,255,255,0.4)]">
+          <h2 className="text-h2 md:text-h1 font-display text-white z-10 relative px-4 drop-shadow-[0_0_25px_rgba(255,255,255,0.4)] break-words">
             {birthdayConfig.name}
           </h2>
           
@@ -114,7 +116,7 @@ export default function Scene03Elly({ onComplete }: Props) {
           ))}
         </motion.div>
 
-        <div className="text-xl md:text-3xl font-display text-brand-cream font-light italic px-4 drop-shadow-md">
+        <div className="text-h3 font-display text-brand-cream font-light italic px-4 drop-shadow-md">
           <TextReveal text="...who somehow makes ordinary days" type="blur" delay={1.5} />
           <br />
           <TextReveal text="feel less ordinary." type="blur" delay={2.0} />

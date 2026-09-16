@@ -39,9 +39,10 @@ export default function Scene08Finale({ onTriggerFinalAudio }: Props) {
     setStage("celebration");
     if (onTriggerFinalAudio) onTriggerFinalAudio();
     
+    const isMobile = window.innerWidth < 768;
     // Celebration particles
     confetti({
-      particleCount: 200,
+      particleCount: isMobile ? 60 : 200,
       spread: 160,
       origin: { y: 0.6 },
       colors: ['#ffffff', '#C86591', '#F3A6C7'],
@@ -96,6 +97,7 @@ export default function Scene08Finale({ onTriggerFinalAudio }: Props) {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
+                className="transform scale-[0.65] md:scale-100 mt-20 md:mt-0"
               >
                 <BirthdayCake onWishMade={handleWishMade} />
               </motion.div>
@@ -116,10 +118,10 @@ export default function Scene08Finale({ onTriggerFinalAudio }: Props) {
                 <h3 className="font-serif italic text-xl md:text-3xl text-brand-cream/80">
                   <TextReveal text="Happy Birthday," type="blur" delay={0.5} />
                 </h3>
-                <h2 className="font-display text-4xl md:text-6xl text-brand-pink text-glow">
+                <h2 className="text-h2 md:text-h1 font-display text-brand-pink text-glow break-words">
                   <TextReveal text={birthdayConfig.nickname + " ❤️"} type="word" delay={2} />
                 </h2>
-                <h1 className="font-display text-3xl md:text-5xl text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]">
+                <h1 className="text-h3 md:text-h2 font-display text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] break-words">
                   <TextReveal text={birthdayConfig.name} type="blur" delay={4} />
                 </h1>
               </motion.div>

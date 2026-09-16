@@ -24,8 +24,8 @@ export default function Scene08HiddenHeart({ onComplete, onUnlockAudio }: Props)
   }[]>([]);
 
   useEffect(() => {
-    // Generate hearts on client side to avoid hydration mismatch
-    const generated = Array.from({ length: window.innerWidth < 768 ? 25 : 50 }).map((_, i) => ({
+    const isMobile = window.innerWidth < 768;
+    const generated = Array.from({ length: isMobile ? 15 : 50 }).map((_, i) => ({
       id: i,
       x: 5 + Math.random() * 90,
       y: 5 + Math.random() * 90,
@@ -60,7 +60,7 @@ export default function Scene08HiddenHeart({ onComplete, onUnlockAudio }: Props)
       transition={{ duration: 0.5 }}
     >
       <div className="absolute top-10 md:top-20 text-center z-20 pointer-events-none w-full px-4">
-        <h2 className="font-display text-2xl md:text-4xl text-brand-cream text-glow">
+        <h2 className="text-h3 md:text-h2 font-display text-brand-cream text-glow break-words">
           There are many hearts here.
         </h2>
         <p className="text-brand-cream/60 font-sans mt-2 text-sm md:text-base">
@@ -99,7 +99,7 @@ export default function Scene08HiddenHeart({ onComplete, onUnlockAudio }: Props)
                 onClick={() => h.isSecret && handleFound()}
                 whileTap={h.isSecret ? { scale: 0.8 } : {}}
               >
-                <div className={`transition-all duration-500 relative ${h.isSecret ? 'text-4xl md:text-5xl drop-shadow-[0_0_15px_rgba(255,0,0,0.8)]' : 'text-xl md:text-3xl'}`}>
+                <div className={`transition-all duration-500 relative ${h.isSecret ? 'text-h2 md:text-h1 drop-shadow-[0_0_15px_rgba(255,0,0,0.8)]' : 'text-xl md:text-3xl'}`}>
                   {h.isSecret ? (
                     <>
                       <span className="relative z-10">❤️</span>
@@ -136,7 +136,7 @@ export default function Scene08HiddenHeart({ onComplete, onUnlockAudio }: Props)
               ❤️
             </motion.div>
             <div className="text-center space-y-4 relative z-10">
-              <h2 className="font-display text-3xl md:text-5xl text-brand-cream">
+              <h2 className="text-h3 md:text-h2 font-display text-brand-cream break-words">
                 You found it.
               </h2>
               <p className="font-sans text-brand-rose">Of course you did.</p>
